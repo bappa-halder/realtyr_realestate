@@ -3,7 +3,7 @@ import bedIcon from "../assets/ic-bed.svg"
 import bathIcon from "../assets/ic-bath.svg"
 import area from "../assets/ic-sq-feet.svg"
 import { useDispatch, useSelector } from "react-redux";
-import { addToWishList, fetchWishList, removeFromWishList } from "../features/wishlistSlice";
+import { addToWishList, fetchWishList, removeFromWishList } from "../features/wishListSlice";
 import { fetchAllProperties } from "../features/propertySlice";
 import DelModal from "./DelModal";
 import AddPropertyModal from "./AddPropertyModal";
