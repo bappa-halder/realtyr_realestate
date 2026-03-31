@@ -49,7 +49,7 @@ const EditModal = ({ selectProperty, setEditModal }) => {
         <>
             <div className="fixed z-10 w-full h-full top-0 left-0 bg-[#000000bf] flex justify-center items-center">
                 <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3 bg-white pt-10 pb-6 px-6 rounded relative bg-white">
-                    <button onClick={onCancel} className="absolute top-1 right-2 text-[8px] w-[20px] h-[20px] rounded-full border border-red-500 text-red-500 hover:bg-red-600 hover:text-white transition duration-300 ease-in-out flex justify-center items-center"><i className="fa-solid fa-xmark"></i></button>
+                    <button type="button" onClick={onCancel} className="absolute top-1 right-2 text-[8px] w-[20px] h-[20px] rounded-full border border-red-500 text-red-500 hover:bg-red-600 hover:text-white transition duration-300 ease-in-out flex justify-center items-center"><i className="fa-solid fa-xmark"></i></button>
                     <input type="text" {...register("title")} className="py-1 ps-2 border rounded text-sm" />
                     <input type="text" {...register("location")} className="py-1 ps-2 border rounded text-sm" />
                     <div className="flex sm:flex-row flex-col gap-3">
