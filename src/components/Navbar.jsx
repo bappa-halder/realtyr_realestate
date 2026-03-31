@@ -8,6 +8,7 @@ import edit from "../assets/edit.png"
 
 const Navbar = () => {
   const dispatch = useDispatch()
+  const API = import.meta.env.VITE_API_URL;
   const navigate = useNavigate()
   const fileInputRef = useRef(null)
   const [profile, setProfile] = useState(false)
@@ -71,7 +72,13 @@ const Navbar = () => {
               <div className="space-x-4 flex items-center">
                 <div className="profile relative w-[32px] h-[32px] rounded-full border">
                   <button onClick={() => { setProfile(!profile) }} className="absolute w-[26px] h-[26px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                    <img src={user.avatar || "http://localhost:3000/upload/default.png"} alt="user" className="object-cover rounded-full" />
+                    <img src={
+                      user.avatar
+                        ? user.avatar.startsWith("http")
+                          ? user.avatar.replace("http://localhost:3000", API)
+                          : `${API}/upload/${user.avatar}`
+                        : `${API}/upload/default.png`
+                    } alt="user" className="object-cover rounded-full" />
                   </button>
                   {
                     profile && (
