@@ -111,7 +111,11 @@ const LatestPropertyCard = () => {
                             <div key={item._id}>
                                 <div className="relative">
                                     <div className="h-[250px]">
-                                        <img src={`${API}/upload/${item.image}`} alt={item.title} className="rounded-lg w-full" />
+                                        <img src={
+    item.image.startsWith("http")
+      ? item.image.replace("http://localhost:3000/upload/", `${API}/upload/`)
+      : `${API}/upload/${item.image}`
+  } alt={item.title} className="rounded-lg w-full" />
                                     </div>
                                     <p className="leading-none py-2 px-3 bg-white rounded-xl absolute top-3 right-3 text-sm">
                                         For {item.purpose}
