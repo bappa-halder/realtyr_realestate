@@ -8,6 +8,7 @@ import commercial from "../assets/service-icon-01.svg"
 import home from "../assets/service-icon-02.svg"
 import relocation from "../assets/service-icon-03.svg"
 import service from "../assets/service-image.jpg"
+import { Link } from "react-router-dom";
 const About = () => {
     return (
         <>
@@ -78,9 +79,9 @@ const About = () => {
                                 </ul>
                             </div>
 
-                            <button className="border border-black rounded py-2 px-5 text-sm md:text-base hover:bg-black hover:text-white transition duration-300 ease-in-out">
+                            <Link to="/contact" className="border border-black rounded py-2 px-5 text-sm md:text-base hover:bg-black hover:text-white transition duration-300 ease-in-out">
                                 Get Started
-                            </button>
+                            </Link>
                         </div>
                     </div>
 
