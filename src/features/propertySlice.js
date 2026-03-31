@@ -79,7 +79,7 @@ export const updateProperty = createAsyncThunk("property/update", async ({ id, d
         const res = await axios.put(`${API}/property/updateProperty/${id}`, data, {
             headers: {
                 Authorization: `Bearer ${token}`,
-                // "Content-Type": "multipart/form-data"
+                "Content-Type": "multipart/form-data",
             }
         })
         return res.data?.data
@@ -138,6 +138,7 @@ const propertySlice = createSlice({
 
 
             .addCase(updateProperty.fulfilled, (state, action) => {
+                console.log("UPDATE RESPONSE:", action.payload)
                 const index = state.properties.findIndex(
                     (property) => property._id === action.payload._id
                 )
