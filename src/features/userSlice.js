@@ -16,13 +16,14 @@ const initialState = {
     isVerified: !!tokenFromStorage
 }
 
+const API = import.meta.env.VITE_API_URL;
 
 export const registerUser = createAsyncThunk(
     "user/register",
     async (data, thunkApi) => {
         try {
             const response = await axios.post(
-                "http://localhost:3000/user/register",
+                `${API}/user/register`,
                 data,
                 {
                     headers: {
@@ -46,7 +47,7 @@ export const registerUser = createAsyncThunk(
 export const verifyUser = createAsyncThunk("user/verify", async (token, thunkApi) => {
     try {
         const response = await axios.get(
-            "http://localhost:3000/user/verify",
+            `${API}/user/verify`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -65,7 +66,7 @@ export const verifyUser = createAsyncThunk("user/verify", async (token, thunkApi
 
 export const loginUser = createAsyncThunk("user/login", async (data, thunkApi) => {
     try {
-        const response = await axios.post("http://localhost:3000/user/login", data)
+        const response = await axios.post(`${API}/user/login`, data)
         return response.data
         console.log(response.data);
     } catch (error) {
@@ -80,7 +81,7 @@ export const logoutUser = createAsyncThunk("user/logout", async (_, thunkApi) =>
     try {
         const token = localStorage.getItem("token")
         if (token) {
-            await axios.delete("http://localhost:3000/user/logout", {
+            await axios.delete(`${API}/user/logout`, {
                 headers: { Authorization: `Bearer ${token}` }
             })
         }
@@ -96,7 +97,7 @@ export const editProfile = createAsyncThunk("user/editProfile", async (data, thu
     try {
         const token = localStorage.getItem("token");
 
-        const response = await axios.put("http://localhost:3000/user/edit", data,
+        const response = await axios.put(`${API}/user/edit`, data,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
