@@ -79,7 +79,6 @@ export const updateProperty = createAsyncThunk("property/update", async ({ id, d
         const res = await axios.put(`${API}/property/updateProperty/${id}`, data, {
             headers: {
                 Authorization: `Bearer ${token}`,
-                "Content-Type": "multipart/form-data",
             }
         })
         return res.data?.data
