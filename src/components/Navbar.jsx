@@ -72,25 +72,13 @@ const Navbar = () => {
               <div className="space-x-4 flex items-center">
                 <div className="profile relative w-[32px] h-[32px] rounded-full border">
                   <button onClick={() => { setProfile(!profile) }} className="absolute w-[26px] h-[26px] top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-                    <img src={
-                      user.avatar
-                        ? user.avatar.startsWith("http")
-                          ? user.avatar.replace("http://localhost:3000", API)
-                          : `${API}/upload/${user.avatar}`
-                        : `${API}/upload/default.png`
-                    } alt="user" className="object-cover rounded-full" />
+                    <img src={user.avatar || "/default.png"} alt="user" className="object-cover rounded-full" />
                   </button>
                   {
                     profile && (
                       <div className="absolute top-10 right-0 border flex flex-col items-center p-4 rounded-lg bg-white z-10">
                         <div className="relative w-[42px] h-[42px] rounded-full mb-2">
-                          <img src={
-                            user.avatar
-                              ? user.avatar.startsWith("http")
-                                ? user.avatar.replace("http://localhost:3000", API)
-                                : `${API}/upload/${user.avatar}`
-                              : `${API}/upload/default.png`
-                          } alt="" className="w-[100%] h-[100%] rounded-full object-cover" />
+                          <img src={user.avatar || "/default.png"} alt="" className="w-[100%] h-[100%] rounded-full object-cover" />
                           <button onClick={handleEditClick} className="absolute right-0 bottom-0 w-[20px] h-[20px] rounded-full bg-white flex justify-center items-center">
                             <img src={edit} alt="" className="w-[80%] h-[80%] object-contain" />
                           </button>
