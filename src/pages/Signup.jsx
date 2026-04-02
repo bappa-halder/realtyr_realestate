@@ -48,7 +48,7 @@ const Signup = () => {
 
   return (
     <>
-      <div className="h-dvh flex justify-center items-center bg-[url(./assets/signup_bg.webp)] bg-cover bg-center">
+      <div className="px-4 h-dvh flex justify-center items-center bg-[url(./assets/signup_bg.webp)] bg-cover bg-center">
         <div className="border bg-[#00000087] p-6 rounded w-full max-w-[400px]">
           <form onSubmit={handleSubmit} encType="multipart/form-data" className="flex flex-col gap-3 ">
             <input

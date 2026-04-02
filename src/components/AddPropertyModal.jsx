@@ -29,7 +29,7 @@ const AddPropertyModal = ({ setAddModal, currentPage, setPage, currentLength }) 
             reset()
             setAddModal(false)
         } catch (error) {
-            toast.error(error || "Property added failed");
+            toast.error("Something went wrong");
         }
     };
 

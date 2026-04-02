@@ -39,7 +39,7 @@ const EditModal = ({ selectProperty, setEditModal }) => {
             toast.success("Property updated successfully");
             setEditModal(false)
         } catch (error) {
-            toast.error(error || "Property update failed")
+            toast.error("Something went wrong")
         }
     }
     const onCancel = () => {
