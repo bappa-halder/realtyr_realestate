@@ -28,11 +28,11 @@ const Login = () => {
                     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
                         <div className="flex flex-col">
                             <input type="email" {...register("email")} placeholder="Enter your email id" className="py-2 ps-2 border rounded bg-transparent text-sm outline-none text-white placeholder:text-white" />
-                            <p className="text-red-500 text-xs">{errors.email?.message}</p>
+                            {error && (<p className="text-red-500 text-sm text-center">{error}</p>)}
                         </div>
                         <div className="flex flex-col">
                             <input type="password" {...register("password")} placeholder="Enter password" className="py-2 ps-2 border rounded bg-transparent text-sm outline-none text-white placeholder:text-white" />
-                            <p className="text-red-500 text-xs">{errors.password?.message}</p>
+                            {error && (<p className="text-red-500 text-sm text-center">{error}</p>)}
                         </div>
                         <button type="submit" className="py-2 bg-indigo-500 hover:bg-indigo-600 transition duration-300 ease-in-out text-white rounded">Login</button>
                     </form>
