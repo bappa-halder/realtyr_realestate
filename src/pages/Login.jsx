@@ -2,15 +2,13 @@ import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../features/userSlice";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { loginSchema} from "../validation/userSchema";
 import toast from "react-hot-toast";
 
 const Login = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { error } = useSelector((state) => state.user);
-    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(loginSchema) });
+    const { register, handleSubmit } = useForm();
 
     const onSubmit = async (data) => {
         try {
@@ -28,11 +26,15 @@ const Login = () => {
                     <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
                         <div className="flex flex-col">
                             <input type="email" {...register("email")} placeholder="Enter your email id" className="py-2 ps-2 border rounded bg-transparent text-sm outline-none text-white placeholder:text-white" />
-                            {error && (<p className="text-red-500 text-sm text-center">{error}</p>)}
+                            {error &&
+                                (<p className="text-red-500 text-sm text-center">{error}</p>)
+                            }
                         </div>
                         <div className="flex flex-col">
                             <input type="password" {...register("password")} placeholder="Enter password" className="py-2 ps-2 border rounded bg-transparent text-sm outline-none text-white placeholder:text-white" />
-                            {error && (<p className="text-red-500 text-sm text-center">{error}</p>)}
+                            {error &&
+                                (<p className="text-red-500 text-sm text-center">{error}</p>)
+                            }
                         </div>
                         <button type="submit" className="py-2 bg-indigo-500 hover:bg-indigo-600 transition duration-300 ease-in-out text-white rounded">Login</button>
                     </form>
