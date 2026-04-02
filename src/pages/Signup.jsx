@@ -1,4 +1,3 @@
-// import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -13,43 +12,6 @@ const Signup = () => {
 
   const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(userSchema) });
   const { loading, error } = useSelector((state) => state.user);
-
-  // const [formData, setFormData] = useState({
-  //   userName: "",
-  //   phone: "",
-  //   email: "",
-  //   password: "",
-  //   avatar: null,
-  // });
-
-  // const handleChange = (e) => {
-  //   if (e.target.name === "avatar") {
-  //     setFormData({ ...formData, avatar: e.target.files[0] });
-  //   } else {
-  //     setFormData({ ...formData, [e.target.name]: e.target.value });
-  //   }
-  // };
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   try {
-  //     const data = new FormData();
-  //     data.append("userName", formData.userName);
-  //     data.append("phone", formData.phone);
-  //     data.append("email", formData.email);
-  //     data.append("password", formData.password);
-  //     if (formData.avatar) {
-  //       data.append("avatar", formData.avatar);
-  //     }
-
-  //     await dispatch(registerUser(data)).unwrap();
-  //     toast.success("Registered! Verify your email 📩");
-  //     navigate("/login");
-  //   } catch (error) {
-  //     toast.error(typeof error === "string" ? error : error?.message || "Signup failed");
-  //   }
-  // };
-
 
   const onSubmit = async (data) => {
     try {

@@ -1,6 +1,7 @@
 import * as yup from "yup";
 
-export const userSchema = yup.object({
+// signupSchema
+export const signupSchema = yup.object({
   userName: yup
     .string()
     .trim()
@@ -23,19 +24,27 @@ export const userSchema = yup.object({
     .required("Please enter your password")
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])/,
-      "Password must contain uppercase, lowercase, number and special character"
+      "Must contain uppercase, lowercase, number & special character"
     )
     .min(8, "Password must be at least 8 characters"),
+
+  avatar: yup
+    .mixed()
+    .nullable()
+    .test("fileType", "Only JPG/PNG allowed", (value) => {
+      if (!value || value.length === 0) return true;
+      return ["image/jpeg", "image/png"].includes(value[0]?.type);
+    })
 });
 
-export const validateUser = (schema) => async (req, res, next) => {
-  try {
-    await schema.validate(req.body, { abortEarly: false });
-    next();
-  } catch (err) {
-    return res.status(400).json({
-      success: false,
-      errors: err.errors,
-    });
-  }
-};
+// loginSchema
+export const loginSchema = yup.object({
+  email: yup
+    .string()
+    .email("Invalid email format")
+    .required("Email is required"),
+
+  password: yup
+    .string()
+    .required("Password is required")
+});

@@ -1,4 +1,3 @@
-// import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
@@ -12,10 +11,6 @@ const Login = () => {
     const navigate = useNavigate()
     const { error } = useSelector((state) => state.user);
     const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(userSchema) });
-    // const [formData, setFormData] = useState({
-    //     email: "",
-    //     password: ""
-    // })
 
     const onSubmit = async (data) => {
         try {
