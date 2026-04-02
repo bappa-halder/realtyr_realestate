@@ -1,4 +1,4 @@
-import { useForm } from "react-hook-form";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../features/userSlice";
@@ -8,24 +8,28 @@ const Login = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { error } = useSelector((state) => state.user);
-    const { register, handleSubmit } = useForm();
+    const [formData, setFormData] = useState({
+        email: "",
+        password: ""
+    })
 
-    const onSubmit = async (data) => {
+    const handleSubmit = async (e) => {
+        e.preventDefault()
         try {
-            await dispatch(loginUser(data)).unwrap();
+            await dispatch(loginUser(formData)).unwrap()
             toast.success("Login successful 🎉");
-            navigate("/");
-        } catch (err) {
+            navigate("/")
+        } catch (error) {
             toast.error(err || "Login failed");
         }
-    };
+    }
     return (
         <>
             <div className="px-4 h-dvh flex justify-center items-center bg-[url(./assets/login_bg.webp)] bg-cover bg-center">
                 <div className="border bg-[#00000087] p-6 rounded w-full max-w-[400px]">
-                    <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-3">
-                        <input type="email" {...register("email")} placeholder="Enter your email id" className="py-2 ps-2 border rounded bg-transparent text-sm outline-none text-white placeholder:text-white" />
-                        <input type="password" {...register("password")} placeholder="Enter password" className="py-2 ps-2 border rounded bg-transparent text-sm outline-none text-white placeholder:text-white" />
+                    <form action="" onSubmit={handleSubmit} className="flex flex-col gap-3">
+                        <input type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder="Enter your email id" className="py-2 ps-2 border rounded bg-transparent text-sm outline-none text-white placeholder:text-white" />
+                        <input type="password" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} placeholder="Enter password" className="py-2 ps-2 border rounded bg-transparent text-sm outline-none text-white placeholder:text-white" />
                         {error && (
                             <p className="text-red-500 text-sm text-center">
                                 {error}
