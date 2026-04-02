@@ -1,36 +1,48 @@
-import { useForm } from "react-hook-form";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../features/userSlice";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { userSchema } from "../validation/userSchema";
 import toast from "react-hot-toast";
 
 const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(userSchema) });
   const { loading, error } = useSelector((state) => state.user);
 
-  const onSubmit = async (data) => {
+  const [formData, setFormData] = useState({
+    userName: "",
+    phone: "",
+    email: "",
+    password: "",
+    avatar: null,
+  });
+
+  const handleChange = (e) => {
+    if (e.target.name === "avatar") {
+      setFormData({ ...formData, avatar: e.target.files[0] });
+    } else {
+      setFormData({ ...formData, [e.target.name]: e.target.value });
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
-      const formData = new FormData();
-
-      formData.append("userName", data.userName);
-      formData.append("phone", data.phone);
-      formData.append("email", data.email);
-      formData.append("password", data.password);
-
-      if (data.avatar && data.avatar[0]) {
-        formData.append("avatar", data.avatar[0]);
+      const data = new FormData();
+      data.append("userName", formData.userName);
+      data.append("phone", formData.phone);
+      data.append("email", formData.email);
+      data.append("password", formData.password);
+      if (formData.avatar) {
+        data.append("avatar", formData.avatar);
       }
 
-      await dispatch(registerUser(formData)).unwrap();
+      await dispatch(registerUser(data)).unwrap();
       toast.success("Registered! Verify your email 📩");
       navigate("/login");
     } catch (error) {
-      toast.error(error?.message || "Signup failed");
+      toast.error(typeof error === "string" ? error : error?.message || "Signup failed");
     }
   };
 
@@ -38,51 +50,53 @@ const Signup = () => {
     <>
       <div className="px-4 h-dvh flex justify-center items-center bg-[url(./assets/signup_bg.webp)] bg-cover bg-center">
         <div className="border bg-[#00000087] p-6 rounded w-full max-w-[400px]">
-          <form onSubmit={handleSubmit(onSubmit)} encType="multipart/form-data" className="flex flex-col gap-3 ">
-            <div className="flex flex-col">
-              <input
-                type="text"
-                {...register("userName")}
-                placeholder="Username"
-                className="py-2 ps-2 border rounded bg-transparent text-sm outline-none text-white placeholder:text-white"
-              />
-              <p className="error">{errors.userName?.message}</p>
-            </div>
-            <div>
-              <input
-                type="text"
-                {...register("phone")}
-                placeholder="Phone"
-                className="py-2 ps-2 border rounded bg-transparent text-sm outline-none text-white placeholder:text-white"
-              />
-              <p className="error">{errors.phone?.message}</p>
-            </div>
-            <div className="flex flex-col">
-              <input
-                type="email"
-                {...register("email")}
-                placeholder="Email"
-                className="py-2 ps-2 border rounded bg-transparent text-sm outline-none text-white placeholder:text-white"
-              />
-              <p className="error">{errors.email?.message}</p>
-            </div>
-            <div className="flex flex-col">
-              <input
-                type="password"
-                {...register("password")}
-                placeholder="Password"
-                className="py-2 ps-2 border rounded bg-transparent text-sm outline-none text-white placeholder:text-white"
-              />
-              <p className="error">{errors.password?.message}</p>
-            </div>
-            <div className="flex flex-col">
-              <input
-                type="file"
-                {...register("avatar")}
-                className="text-sm text-white"
-              />
-              <p className="error">{errors.avatar?.message}</p>
-            </div>
+          <form onSubmit={handleSubmit} encType="multipart/form-data" className="flex flex-col gap-3 ">
+            <input
+              type="text"
+              name="userName"
+              placeholder="Username"
+              value={formData.userName}
+              onChange={handleChange}
+              required
+              className="py-2 ps-2 border rounded bg-transparent text-sm outline-none text-white placeholder:text-white"
+            />
+
+            <input
+              type="text"
+              name="phone"
+              placeholder="Phone"
+              value={formData.phone}
+              onChange={handleChange}
+              className="py-2 ps-2 border rounded bg-transparent text-sm outline-none text-white placeholder:text-white"
+            />
+
+            <input
+              type="email"
+              name="email"
+              placeholder="Email"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className="py-2 ps-2 border rounded bg-transparent text-sm outline-none text-white placeholder:text-white"
+            />
+
+            <input
+              type="password"
+              name="password"
+              placeholder="Password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              className="py-2 ps-2 border rounded bg-transparent text-sm outline-none text-white placeholder:text-white"
+            />
+
+            <input
+              type="file"
+              name="avatar"
+              accept="image/png, image/jpeg"
+              onChange={handleChange}
+              className="text-sm text-white"
+            />
 
             <button type="submit" className="py-2 bg-indigo-500 hover:bg-indigo-600 transition duration-300 ease-in-out text-white rounded">
               {loading ? "Registering..." : "Register"}
