@@ -3,14 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../features/userSlice";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { userSchema } from "../validation/userSchema";
+import { loginSchema} from "../validation/userSchema";
 import toast from "react-hot-toast";
 
 const Login = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { error } = useSelector((state) => state.user);
-    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(userSchema) });
+    const { register, handleSubmit, formState: { errors } } = useForm({ resolver: yupResolver(loginSchema) });
 
     const onSubmit = async (data) => {
         try {
