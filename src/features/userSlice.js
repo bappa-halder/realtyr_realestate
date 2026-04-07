@@ -165,82 +165,39 @@ const userSlice = createSlice({
                 state.error = null
             })
             
-            // .addCase(loginUser.fulfilled, (state, action) => {
-            //     state.loginLoading = false;
-
-            //     if (!action.payload?.data) {
-            //         state.error = action.payload?.message || "Login failed";
-            //         return;
-            //     }
-
-            //     const user = action.payload.data;
-
-            //     if (!user.verified) {
-            //         state.error = "Complete email verification then login";
-            //         return;
-            //     }
-
-            //     const userData = {
-            //         _id: user._id,
-            //         userName: user.userName,
-            //         email: user.email,
-            //         phone: user.phone,
-            //         role: user.role,
-            //         avatar: user.avatar,
-            //         verified: user.verified
-            //     };
-
-            //     state.user = userData;
-            //     state.token = action.payload.accessToken;
-            //     state.isAuthenticated = true;
-            //     state.isVerified = true;
-
-            //     localStorage.setItem("token", state.token);
-            //     localStorage.setItem("user", JSON.stringify(userData));
-            // })
             .addCase(loginUser.fulfilled, (state, action) => {
-    state.loginLoading = false;
+                state.loginLoading = false;
 
-    const payload = action.payload;
+                if (!action.payload?.data) {
+                    state.error = action.payload?.message || "Login failed";
+                    return;
+                }
 
-    // ❌ if backend sends error in success response
-    if (!payload || payload.success === false) {
-        state.error = payload?.message || "Login failed";
-        return;
-    }
+                const user = action.payload.data;
 
-    // ✅ FIX: correct fields
-    const user = payload.user || payload.data;
-    const token = payload.token || payload.accessToken;
+                if (!user.verified) {
+                    state.error = "Complete email verification then login";
+                    return;
+                }
 
-    if (!user) {
-        state.error = "User data missing";
-        return;
-    }
+                const userData = {
+                    _id: user._id,
+                    userName: user.userName,
+                    email: user.email,
+                    phone: user.phone,
+                    role: user.role,
+                    avatar: user.avatar,
+                    verified: user.verified
+                };
 
-    if (!user.verified) {
-        state.error = "Complete email verification then login";
-        return;
-    }
+                state.user = userData;
+                state.token = action.payload.accessToken;
+                state.isAuthenticated = true;
+                state.isVerified = true;
 
-    const userData = {
-        _id: user._id,
-        userName: user.userName,
-        email: user.email,
-        phone: user.phone,
-        role: user.role,
-        avatar: user.avatar,
-        verified: user.verified
-    };
-
-    state.user = userData;
-    state.token = token;
-    state.isAuthenticated = true;
-    state.isVerified = true;
-
-    localStorage.setItem("token", token);
-    localStorage.setItem("user", JSON.stringify(userData));
-})
+                localStorage.setItem("token", state.token);
+                localStorage.setItem("user", JSON.stringify(userData));
+            })
             .addCase(loginUser.rejected, (state, action) => {
                 state.loginLoading = false
                 state.error = action.payload?.message || "Login failed"
