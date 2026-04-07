@@ -32,7 +32,7 @@ const Login = () => {
                         <input type="password" value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} placeholder="Enter password" className="py-2 ps-2 border rounded bg-transparent text-sm outline-none text-white placeholder:text-white" />
                         {error && (
                             <p className="text-red-500 text-sm text-center">
-                                {error}
+                                {error?.message || error}
                             </p>
                         )}
                         <button type="submit" className="py-2 bg-indigo-500 hover:bg-indigo-600 transition duration-300 ease-in-out text-white rounded">Login</button>
