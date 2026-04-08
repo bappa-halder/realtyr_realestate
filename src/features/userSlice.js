@@ -164,7 +164,40 @@ const userSlice = createSlice({
                 state.loginLoading = true
                 state.error = null
             })
-            
+
+            // .addCase(loginUser.fulfilled, (state, action) => {
+            //     state.loginLoading = false;
+
+            //     if (!action.payload?.data) {
+            //         state.error = action.payload?.message || "Login failed";
+            //         return;
+            //     }
+
+            //     const user = action.payload.data;
+
+            //     if (!user.verified) {
+            //         state.error = "Complete email verification then login";
+            //         return;
+            //     }
+
+            //     const userData = {
+            //         _id: user._id,
+            //         userName: user.userName,
+            //         email: user.email,
+            //         phone: user.phone,
+            //         role: user.role,
+            //         avatar: user.avatar,
+            //         verified: user.verified
+            //     };
+
+            //     state.user = userData;
+            //     state.token = action.payload.accessToken;
+            //     state.isAuthenticated = true;
+            //     state.isVerified = true;
+
+            //     localStorage.setItem("token", state.token);
+            //     localStorage.setItem("user", JSON.stringify(userData));
+            // })
             .addCase(loginUser.fulfilled, (state, action) => {
                 state.loginLoading = false;
 

@@ -33,7 +33,6 @@ const Login = () => {
                         {error && (
                             <p className="text-red-500 text-sm text-center">
                                 {error}
-                                {/* {typeof error === "string" ? error : error?.message} */}
                             </p>
                         )}
                         <button type="submit" className="py-2 bg-indigo-500 hover:bg-indigo-600 transition duration-300 ease-in-out text-white rounded">Login</button>
