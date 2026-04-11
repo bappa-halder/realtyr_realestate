@@ -6,9 +6,11 @@ const initialState = {
     error: null
 }
 
+const API = import.meta.env.VITE_API_URL;
+
 export const sendMessage = createAsyncThunk("contact/sendMessage", async (formData, thunkApi) => {
     try {
-        const response = await axios.post("http://localhost:3000/contact/sendMessage",
+        const response = await axios.post(`${API}/contact/sendMessage`,
             formData
         )
         return response.data
