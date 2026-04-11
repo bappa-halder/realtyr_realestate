@@ -16,14 +16,13 @@ const initialState = {
     isVerified: !!tokenFromStorage
 }
 
-const API = import.meta.env.VITE_API_URL;
 
 export const registerUser = createAsyncThunk(
     "user/register",
     async (data, thunkApi) => {
         try {
             const response = await axios.post(
-                `${API}/user/register`,
+                "http://localhost:3000/user/register",
                 data,
                 {
                     headers: {
@@ -47,7 +46,7 @@ export const registerUser = createAsyncThunk(
 export const verifyUser = createAsyncThunk("user/verify", async (token, thunkApi) => {
     try {
         const response = await axios.get(
-            `${API}/user/verify`,
+            "http://localhost:3000/user/verify",
             {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -66,7 +65,7 @@ export const verifyUser = createAsyncThunk("user/verify", async (token, thunkApi
 
 export const loginUser = createAsyncThunk("user/login", async (data, thunkApi) => {
     try {
-        const response = await axios.post(`${API}/user/login`, data)
+        const response = await axios.post("http://localhost:3000/user/login", data)
         return response.data
         console.log(response.data);
     } catch (error) {
@@ -81,7 +80,7 @@ export const logoutUser = createAsyncThunk("user/logout", async (_, thunkApi) =>
     try {
         const token = localStorage.getItem("token")
         if (token) {
-            await axios.delete(`${API}/user/logout`, {
+            await axios.delete("http://localhost:3000/user/logout", {
                 headers: { Authorization: `Bearer ${token}` }
             })
         }
@@ -97,7 +96,7 @@ export const editProfile = createAsyncThunk("user/editProfile", async (data, thu
     try {
         const token = localStorage.getItem("token");
 
-        const response = await axios.put(`${API}/user/edit`, data,
+        const response = await axios.put("http://localhost:3000/user/edit", data,
             {
                 headers: {
                     Authorization: `Bearer ${token}`,
@@ -164,40 +163,7 @@ const userSlice = createSlice({
                 state.loginLoading = true
                 state.error = null
             })
-
-            // .addCase(loginUser.fulfilled, (state, action) => {
-            //     state.loginLoading = false;
-
-            //     if (!action.payload?.data) {
-            //         state.error = action.payload?.message || "Login failed";
-            //         return;
-            //     }
-
-            //     const user = action.payload.data;
-
-            //     if (!user.verified) {
-            //         state.error = "Complete email verification then login";
-            //         return;
-            //     }
-
-            //     const userData = {
-            //         _id: user._id,
-            //         userName: user.userName,
-            //         email: user.email,
-            //         phone: user.phone,
-            //         role: user.role,
-            //         avatar: user.avatar,
-            //         verified: user.verified
-            //     };
-
-            //     state.user = userData;
-            //     state.token = action.payload.accessToken;
-            //     state.isAuthenticated = true;
-            //     state.isVerified = true;
-
-            //     localStorage.setItem("token", state.token);
-            //     localStorage.setItem("user", JSON.stringify(userData));
-            // })
+            
             .addCase(loginUser.fulfilled, (state, action) => {
                 state.loginLoading = false;
 
