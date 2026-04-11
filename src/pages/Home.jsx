@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import video from "../assets/home_video.mp4"
 import advanceImg from "../assets/advance-property-search.jpg"
@@ -12,10 +12,16 @@ import Footer from "../components/Footer";
 import LatestPropertyCard from "../components/LatestPropertyCard";
 
 const Home = () => {
+    const videoRef = useRef(null);
+
+    useEffect(() => {
+        videoRef.current?.play().catch(() => { });
+    }, []);
+
     return (
         <>
-        <Navbar/>
-            
+            <Navbar />
+
             <section id="hero" className="py-10 md:py-16">
                 <div className="container mx-auto px-4">
 
@@ -44,7 +50,7 @@ const Home = () => {
 
                     <div className="mt-10 md:mt-[60px]">
                         <video
-                            autoplay loop muted playsinline
+                            ref={videoRef} loop muted playsInline
                             className="w-full lg:max-h-[500px] md:max-h-[400px] rounded-lg object-cover"
                         >
                             <source src={video} type="video/mp4" />
@@ -132,7 +138,7 @@ const Home = () => {
 
             <section id="explore">
                 <div className="container mx-auto px-4">
-                    <LatestPropertyCard/>
+                    <LatestPropertyCard />
                     <div className="mt-12 text-right">
                         <Link to="/properties" className="inline-block px-5 py-3 rounded-lg border border-black bg-black text-white hover:bg-white hover:text-black transition duration-300 ease-in-out">View All Properties</Link>
                     </div>
@@ -141,9 +147,9 @@ const Home = () => {
 
 
 
-<Testimonial/>
+            <Testimonial />
 
-<Footer/>
+            <Footer />
 
         </>
     )
