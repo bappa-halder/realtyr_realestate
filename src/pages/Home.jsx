@@ -44,7 +44,7 @@ const Home = () => {
 
                     <div className="mt-10 md:mt-[60px]">
                         <video
-                            controls
+                            autoplay loop muted playsinline
                             className="w-full lg:max-h-[500px] md:max-h-[400px] rounded-lg object-cover"
                         >
                             <source src={video} type="video/mp4" />
