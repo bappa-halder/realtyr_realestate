@@ -138,7 +138,6 @@ img{
 @media (max-width: 768px){
   .swiper-button-prev {
     left: 10% !important;
-
   }
   .swiper-button-next {
     right: 10% !important;
@@ -148,8 +147,9 @@ img{
 @media (max-width: 546px){
   .swiper-button-prev,
 .swiper-button-next{
-  width: 32px !important;
-  height: 32px !important ;
+  /* width: 32px !important;
+  height: 32px !important ; */
+  display: none !important;
 }
 }
 
