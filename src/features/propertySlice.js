@@ -10,14 +10,14 @@ const initialState = {
     totalItems: 0
 }
 
-const API = import.meta.env.VITE_API_URL;
+
 
 export const fetchAllProperties = createAsyncThunk(
     "property/fetchAll",
     async (page = 1, thunkApi) => {
         try {
             const res = await axios.get(
-                `${API}/property/getAll?page=${page}`
+                `http://localhost:3000/property/getAll?page=${page}`
             );
             return res.data;
         } catch (error) {
@@ -36,7 +36,7 @@ export const addProperty = createAsyncThunk("property/add", async (data, thunkAp
         if (!user || user.role !== "admin") {
             return thunkApi.rejectWithValue("Only admin can add packages")
         }
-        const res = await axios.post(`${API}/property/addProperty`, data,
+        const res = await axios.post("http://localhost:3000/property/addProperty", data,
             {
                 headers: {
                     Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data"
@@ -56,7 +56,7 @@ export const deleteProperty = createAsyncThunk("property/delete", async (id, thu
     try {
         const { token, user } = thunkApi.getState().user
 
-        await axios.delete(`${API}/property/deleteProperty/${id}`,
+        await axios.delete(`http://localhost:3000/property/deleteProperty/${id}`,
             {
                 headers: {
                     Authorization: `Bearer ${token}`
@@ -76,9 +76,10 @@ export const deleteProperty = createAsyncThunk("property/delete", async (id, thu
 export const updateProperty = createAsyncThunk("property/update", async ({ id, data }, thunkApi) => {
     try {
         const { token, user } = thunkApi.getState().user
-        const res = await axios.put(`${API}/property/updateProperty/${id}`, data, {
+        const res = await axios.put(`http://localhost:3000/property/updateProperty/${id}`, data, {
             headers: {
                 Authorization: `Bearer ${token}`,
+                "Content-Type": "multipart/form-data"
             }
         })
         return res.data?.data
@@ -137,7 +138,6 @@ const propertySlice = createSlice({
 
 
             .addCase(updateProperty.fulfilled, (state, action) => {
-                console.log("UPDATE RESPONSE:", action.payload)
                 const index = state.properties.findIndex(
                     (property) => property._id === action.payload._id
                 )

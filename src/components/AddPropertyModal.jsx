@@ -3,12 +3,10 @@ import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { addProperty, fetchAllProperties } from "../features/propertySlice";
 import toast from "react-hot-toast";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { propertySchema } from "../validation/propertySchema";
 
 const AddPropertyModal = ({ setAddModal, currentPage, setPage, currentLength }) => {
     const dispatch = useDispatch()
-    const { register, handleSubmit, reset, formState: { errors } } = useForm({ resolver: yupResolver(propertySchema) });
+    const { register, handleSubmit, reset } = useForm()
     const onSubmit = async (data) => {
         try {
             const formData = new FormData()
@@ -31,31 +29,22 @@ const AddPropertyModal = ({ setAddModal, currentPage, setPage, currentLength }) 
             reset()
             setAddModal(false)
         } catch (error) {
-            toast.error("Something went wrong");
+            toast.error(error || "Property added failed");
         }
     };
 
-    const onCancel = () => {
+    const onCancel = ()=>{
         setAddModal(false)
     }
     return (
         <>
             <div className="fixed z-10 w-full h-full top-0 left-0 bg-[#000000bf] flex justify-center items-center">
                 <form action="" onSubmit={handleSubmit(onSubmit)} className="max-w-[300px] sm:max-w-none flex flex-col gap-3 bg-white pt-10 pb-6 px-6 rounded relative bg-white">
-                    <button type="button" onClick={onCancel} className="absolute top-1 right-2 text-[8px] w-[20px] h-[20px] rounded-full border border-red-500 text-red-500 hover:bg-red-600 hover:text-white transition duration-300 ease-in-out flex justify-center items-center"><i className="fa-solid fa-xmark"></i></button>
-                    <div className="flex flex-col">
-                        <input type="text" placeholder="Enter title" {...register("title", { required: "Title is required" })} className="py-1 ps-2 border rounded text-sm" />
-                        <p className="text-red-500 text-xs">{errors.title?.message}</p>
-                    </div>
-                    <div className="flex flex-col">
-                        <input type="text" placeholder="Enter location" {...register("location", { required: "Location is required" })} className="py-1 ps-2 border rounded text-sm" />
-                        <p className="text-red-500 text-xs">{errors.location?.message}</p>
-                    </div>
+                    <button onClick={onCancel} className="absolute top-1 right-2 text-[8px] w-[20px] h-[20px] rounded-full border border-red-500 text-red-500 hover:bg-red-600 hover:text-white transition duration-300 ease-in-out flex justify-center items-center"><i className="fa-solid fa-xmark"></i></button>
+                    <input type="text" placeholder="Enter title" {...register("title", { required: "Title is required" })} className="py-1 ps-2 border rounded text-sm"/>
+                    <input type="text" placeholder="Enter location" {...register("location", { required: "Location is required" })} className="py-1 ps-2 border rounded text-sm" />
                     <div className="flex sm:flex-row flex-col gap-3">
-                        <div className="flex flex-col">
-                            <input type="number" placeholder="Enter price" {...register("price", { required: "Price is required" })} className="flex-1 py-1 ps-2 border rounded text-sm" />
-                            <p className="text-red-500 text-xs">{errors.price?.message}</p>
-                        </div>
+                        <input type="number" placeholder="Enter price" {...register("price", { required: "Price is required" })} className="flex-1 py-1 ps-2 border rounded text-sm"/>
                         <select {...register("purpose", { required: "Purpose is required" })} className="py-1 ps-2 border rounded text-sm">
                             <option value="">Select type</option>
                             <option value="sale">Sale</option>
@@ -63,22 +52,12 @@ const AddPropertyModal = ({ setAddModal, currentPage, setPage, currentLength }) 
                         </select>
                     </div>
                     <div className="flex sm:flex-row flex-col gap-3">
-                        <div className="flex flex-col">
                         <input type="number" placeholder="bedroom" {...register("bedroom", { required: "Bedroom is required" })} className="py-1 ps-2 border rounded text-sm" />
-                        <p className="text-red-500 text-xs">{errors.bedroom?.message}</p>
-                        </div>
-                        <div className="flex flex-col">
                         <input type="number" placeholder="bathroom" {...register("bathroom", { required: "Bathroom is required" })} className="py-1 ps-2 border rounded text-sm" />
-                        <p className="text-red-500 text-xs">{errors.bathroom?.message}</p>
-                        </div>
-                        <div className="flex flex-col">
                         <input type="number" placeholder="area" {...register("area", { required: "Area is required" })} className="py-1 ps-2 border rounded text-sm" />
-                        <p className="text-red-500 text-xs">{errors.area?.message}</p>
-                        </div>
                     </div>
 
-                    <input type="file" {...register("image", { required: "Image is required" })} className="text-sm" />
-                    <p className="text-red-500 text-xs">{errors.image?.message}</p>
+                    <input type="file" {...register("image", { required: "Image is required" })} className="text-sm"/>
                     <button className="py-2 border rounded text-sm">Add</button>
                 </form>
             </div>

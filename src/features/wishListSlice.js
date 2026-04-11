@@ -1,4 +1,3 @@
-
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 
@@ -7,8 +6,6 @@ const initialState = {
   loading: false,
   error: null,
 };
-
-const API = import.meta.env.VITE_API_URL;
 
 export const fetchWishList = createAsyncThunk(
   "wishList/fetchWishList",
@@ -22,8 +19,8 @@ export const fetchWishList = createAsyncThunk(
 
       const url =
         user?.role === "admin"   
-          ? `${API}/wishList/allWishList`
-          : `${API}/wishList/myWishList`;
+          ? "http://localhost:3000/wishList/allWishList"
+          : "http://localhost:3000/wishList/myWishList";
 
       const res = await axios.get(url, {
         headers: { Authorization: `Bearer ${token}` },
@@ -45,7 +42,7 @@ export const addToWishList = createAsyncThunk("wishList/addToWishList", async (p
   try {
     const { token } = thunkApi.getState().user;
 
-    const res = await axios.post(`${API}/wishList/addWishList`,
+    const res = await axios.post("http://localhost:3000/wishList/addWishList",
       { propertyId },
       {
         headers: { Authorization: `Bearer ${token}` },
@@ -63,7 +60,7 @@ export const removeFromWishList = createAsyncThunk("wishList/removeFromWishList"
   try {
     const { token } = thunkApi.getState().user;
 
-    await axios.delete(`${API}/wishList/deleteWishList/${id}`,
+    await axios.delete(`http://localhost:3000/wishList/deleteWishList/${id}`,
       {
         headers: { Authorization: `Bearer ${token}` },
       }

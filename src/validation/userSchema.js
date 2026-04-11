@@ -27,3 +27,15 @@ export const userSchema = yup.object({
     )
     .min(8, "Password must be at least 8 characters"),
 });
+
+export const validateUser = (schema) => async (req, res, next) => {
+  try {
+    await schema.validate(req.body, { abortEarly: false });
+    next();
+  } catch (err) {
+    return res.status(400).json({
+      success: false,
+      errors: err.errors,
+    });
+  }
+};

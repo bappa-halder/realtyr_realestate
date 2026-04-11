@@ -17,7 +17,7 @@ const DelModal = ({ propertyId, setDelModal, currentPage, setPage, currentLength
             toast.success("Property deleted successfully");
             setDelModal(false)
         } catch (error) {
-            toast.error("Something went wrong")
+            toast.error(error || "Property delete failed")
         }
     }
     const handleCancel = () => {

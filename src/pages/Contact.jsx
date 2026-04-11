@@ -6,7 +6,6 @@ import Footer from "../components/Footer";
 import { useDispatch, useSelector } from "react-redux";
 import { sendMessage } from "../features/contactSlice";
 import toast from "react-hot-toast";
-import { Link } from "react-router-dom";
 
 const Contact = () => {
   const dispatch = useDispatch()
@@ -42,7 +41,7 @@ const Contact = () => {
 
           {/* Banner image */}
           <div>
-            <img src={contact} alt="" className="rounded-xl min-h-[250px] sm:min-h-[300px] md:min-h-auto" />
+            <img src={contact} alt="" className="rounded-xl w-full" />
           </div>
 
           {/* Content */}
@@ -80,7 +79,7 @@ const Contact = () => {
             </div>
 
             {/* Form */}
-            <div className="w-full lg:max-w-[670px] border px-3 py-5 rounded-lg shadow-lg">
+            <div className="w-full lg:max-w-[670px]">
               <form onSubmit={handleSubmit(onSubmit)}>
 
                 {/* Names */}
@@ -108,22 +107,22 @@ const Contact = () => {
                 {/* Contact */}
                 <div className="flex flex-col sm:flex-row gap-6 mb-8 md:mb-10">
                   <div className="w-full">
-                    <input
-                      type="email"
-                      placeholder="Email address*"
-                      {...register("email", { required: "Email is required", pattern: { value: /^\S+@\S+$/i, message: "Invalid email", }, })}
-                      className="border-b border-black focus:border-blue-500 pb-3 md:pb-4 w-full outline-none placeholder:text-black"
-                    />
-                    {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
+                  <input
+                    type="email"
+                    placeholder="Email address*"
+                    {...register("email", { required: "Email is required", pattern: { value: /^\S+@\S+$/i, message: "Invalid email", }, })}
+                    className="border-b border-black focus:border-blue-500 pb-3 md:pb-4 w-full outline-none placeholder:text-black"
+                  />
+                  {errors.email && <p className="text-red-500 text-sm">{errors.email.message}</p>}
                   </div>
                   <div className="w-full">
-                    <input
-                      type="number"
-                      placeholder="Phone number*"
-                      {...register("phone", { required: "Phone is required", minLength: { value: 10, message: "Minimum 10 digits" }, })}
-                      className="border-b border-black focus:border-blue-500 pb-3 md:pb-4 w-full outline-none placeholder:text-black"
-                    />
-                    {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message}</p>}
+                  <input
+                    type="number"
+                    placeholder="Phone number*"
+                    {...register("phone", { required: "Phone is required", minLength: { value: 10, message: "Minimum 10 digits" }, })}
+                    className="border-b border-black focus:border-blue-500 pb-3 md:pb-4 w-full outline-none placeholder:text-black"
+                  />
+                  {errors.phone && <p className="text-red-500 text-sm">{errors.phone.message}</p>}
                   </div>
                 </div>
 
@@ -141,7 +140,7 @@ const Contact = () => {
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-6">
                   <label className="flex items-start text-sm md:text-base">
                     <input type="checkbox" {...register("terms", { required: true })} className="mr-2 mt-1" />
-                    <span>I hereby agree to the <Link to="/terms" className="underline hover:no-underline">Terms & Conditions</Link> of Realtyr.</span>
+                    <span>I hereby agree to the Terms & Conditions of Realtyr.</span>
                   </label>
 
                   <button
