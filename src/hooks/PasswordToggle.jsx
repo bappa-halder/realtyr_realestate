@@ -5,9 +5,9 @@ const PasswordToggle = ()=>{
     const togglePassword = ()=>{
         setShowPassword((prev)=> !prev)
     }
-    return(
+    return{
         showPassword, togglePassword
-    )
+    }
 }
 
 export default PasswordToggle
