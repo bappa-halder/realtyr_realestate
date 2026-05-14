@@ -1,7 +1,7 @@
 import axios from "axios";
 import React from "react";
 import { useDispatch } from "react-redux";
-import { deleteProperty, fetchAllProperties } from "../features/propertySlice";
+import { deleteProperty, fetchAllProperties, fetchOnlyIdproperty } from "../features/propertySlice";
 import toast from "react-hot-toast";
 
 const DelModal = ({ propertyId, setDelModal, currentPage, setPage, currentLength }) => {
@@ -12,7 +12,7 @@ const DelModal = ({ propertyId, setDelModal, currentPage, setPage, currentLength
             if (currentLength === 1 && currentPage > 1) {
                 setPage(currentPage - 1);
             } else {
-                dispatch(fetchAllProperties(currentPage));
+                dispatch(fetchOnlyIdproperty(currentPage));
             }
             toast.success("Property deleted successfully");
             setDelModal(false)

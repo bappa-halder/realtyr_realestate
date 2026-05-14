@@ -4,7 +4,7 @@ import bathIcon from "../assets/ic-bath.svg"
 import area from "../assets/ic-sq-feet.svg"
 import { useDispatch, useSelector } from "react-redux";
 import { addToWishList, fetchWishList, removeFromWishList } from "../features/wishListSlice";
-import { fetchAllProperties } from "../features/propertySlice";
+import { fetchAllProperties, fetchOnlyIdproperty } from "../features/propertySlice";
 import DelModal from "./DelModal";
 import AddPropertyModal from "./AddPropertyModal";
 import EditModal from "./EditModal";
@@ -75,7 +75,12 @@ const LatestPropertyCard = () => {
 
 
     useEffect(() => {
-        dispatch(fetchAllProperties(page))
+        if (user?.role === "admin") {
+            dispatch(fetchOnlyIdproperty(page))
+        }
+        else {
+            dispatch(fetchAllProperties(page))
+        }
         if (user?.role === "user") {
             dispatch(fetchWishList())
         }
@@ -101,107 +106,121 @@ const LatestPropertyCard = () => {
                 Latest Properties
             </h2>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 lg:gap-x-8 gap-y-8 lg:gap-y-12">
+            {
+                properties.length === 0 ? (
+                    <div className="text-center py-10">
+                        <h3 className="text-2xl font-semibold text-gray-600">
+                            Property not found
+                        </h3>
+                    </div>
+                ) : (
 
-                {properties.map((item) => {
-                    const isWishListed = wishLists.some(
-                        (wish) =>
-                            wish.propertyId === item._id ||
-                            wish.propertyId?._id === item._id
-                    );
-                    return (
-                        <div key={item._id}>
-                            <div className="relative">
-                                <div className="h-[250px]">
-                                    <img src={item.image} alt={item.title} className="rounded-lg w-full" />
-                                </div>
-                                <p className="leading-none py-2 px-3 bg-white rounded-xl absolute top-3 right-3 text-sm">
-                                    For {item.purpose}
-                                </p>
 
-                                {
-                                    user?.role === "user" && (
-                                        <button onClick={() => handleWishList(item._id)} className="absolute top-2 left-2 text-red-500 w-[25px] h-[25px] bg-black/30 backdrop-blur-xs rounded-full">
-                                            {isWishListed ? <i className="fa-solid fa-heart"></i> : <i className="fa-regular fa-heart"></i>}
-                                        </button>
-                                    )
-                                }
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 lg:gap-x-8 gap-y-8 lg:gap-y-12">
 
-                            </div>
-                            <div>
-                                <div className="flex justify-between mt-4">
-                                    <h4 className="text-lg md:text-[1.35rem]">{item.title}</h4>
-                                    <h4 className="text-lg md:text-[1.35rem]">${item.price}</h4>
-                                </div>
-
-                                <p className="text-sm md:text-base mt-2 mb-4">{item.location}</p>
-
-                                <div className="flex flex-wrap gap-3 mt-3">
-                                    <div className="flex gap-2 px-3 py-1 rounded-xl border text-sm">
-                                        <img src={bedIcon} alt="" className="w-[15px] object-contain" />
-                                        <p>{item.bedroom}</p>
-                                    </div>
-                                    <div className="flex gap-2 px-3 py-1 rounded-xl border text-sm">
-                                        <img src={bathIcon} alt="" className="w-[15px] object-contain" />
-                                        <p>{item.bathroom}</p>
-                                    </div>
-                                    <div className="flex gap-2 px-3 py-1 rounded-xl border text-sm">
-                                        <img src={area} alt="" className="w-[15px] object-contain" />
-                                        <p>{item.area}</p>
-                                    </div>
-                                </div>
-
-                                {
-                                    user?.role === "admin" && (
-                                        <div className="flex gap-6 mt-6">
-                                            <button onClick={() => handleEditModal(item)} className="flex-1 py-1 border border-[#164c78] rounded hover:bg-[#164c78] hover:text-white transition duration-300 ease-in-out">Edit</button>
-                                            <button onClick={() => handleDelModal(item._id)} className="flex-1 py-1 border border-red-600 rounded hover:bg-red-600 hover:text-white transition duration-300 ease-in-out">Delete</button>
+                        {properties.map((item) => {
+                            const isWishListed = wishLists.some(
+                                (wish) =>
+                                    wish.propertyId === item._id ||
+                                    wish.propertyId?._id === item._id
+                            );
+                            return (
+                                <div key={item._id}>
+                                    <div className="relative">
+                                        <div className="h-[250px]">
+                                            <img src={item.image} alt={item.title} className="rounded-lg w-full" />
                                         </div>
-                                    )
-                                }
-                            </div>
+                                        <p className="leading-none py-2 px-3 bg-white rounded-xl absolute top-3 right-3 text-sm">
+                                            For {item.purpose}
+                                        </p>
+
+                                        {
+                                            user?.role === "user" && (
+                                                <button onClick={() => handleWishList(item._id)} className="absolute top-2 left-2 text-red-500 w-[25px] h-[25px] bg-black/30 backdrop-blur-xs rounded-full">
+                                                    {isWishListed ? <i className="fa-solid fa-heart"></i> : <i className="fa-regular fa-heart"></i>}
+                                                </button>
+                                            )
+                                        }
+
+                                    </div>
+                                    <div>
+                                        <div className="flex justify-between mt-4">
+                                            <h4 className="text-lg md:text-[1.35rem]">{item.title}</h4>
+                                            <h4 className="text-lg md:text-[1.35rem]">${item.price}</h4>
+                                        </div>
+
+                                        <p className="text-sm md:text-base mt-2 mb-4">{item.location}</p>
+
+                                        <div className="flex flex-wrap gap-3 mt-3">
+                                            <div className="flex gap-2 px-3 py-1 rounded-xl border text-sm">
+                                                <img src={bedIcon} alt="" className="w-[15px] object-contain" />
+                                                <p>{item.bedroom}</p>
+                                            </div>
+                                            <div className="flex gap-2 px-3 py-1 rounded-xl border text-sm">
+                                                <img src={bathIcon} alt="" className="w-[15px] object-contain" />
+                                                <p>{item.bathroom}</p>
+                                            </div>
+                                            <div className="flex gap-2 px-3 py-1 rounded-xl border text-sm">
+                                                <img src={area} alt="" className="w-[15px] object-contain" />
+                                                <p>{item.area}</p>
+                                            </div>
+                                        </div>
+
+                                        {
+                                            user?.role === "admin" && (
+                                                <div className="flex gap-6 mt-6">
+                                                    <button onClick={() => handleEditModal(item)} className="flex-1 py-1 border border-[#164c78] rounded hover:bg-[#164c78] hover:text-white transition duration-300 ease-in-out">Edit</button>
+                                                    <button onClick={() => handleDelModal(item._id)} className="flex-1 py-1 border border-red-600 rounded hover:bg-red-600 hover:text-white transition duration-300 ease-in-out">Delete</button>
+                                                </div>
+                                            )
+                                        }
+                                    </div>
 
 
-                        </div>
-                    )
-                })}
+                                </div>
+                            )
+                        })}
 
 
 
 
 
 
-            </div>
+                    </div>
+                )
+            }
+            {
+                totalPages > 1 && (
+                    <div className="flex gap-2 mt-6 justify-center">
+                        <button
+                            disabled={page === 1}
+                            onClick={() => setPage(page - 1)}
+                            className="w-[30px] h-[30px] flex justify-center items-center border rounded-full text-blue-500 disabled:text-blue-200"
+                        >
+                            <i className="fa-solid fa-angle-left"></i>
+                        </button>
 
+                        {pages.map((p) => (
+                            <button
+                                key={p}
+                                onClick={() => setPage(p)}
+                                className={`w-[30px] h-[30px] flex justify-center items-center border rounded-full text-sm ${page === p ? "text-white bg-blue-500" : "bg-white"
+                                    }`}
+                            >
+                                {p}
+                            </button>
+                        ))}
 
-            <div className="flex gap-2 mt-6 justify-center">
-                <button
-                    disabled={page === 1}
-                    onClick={() => setPage(page - 1)}
-                    className="w-[30px] h-[30px] flex justify-center items-center border rounded-full text-blue-500 disabled:text-blue-200"
-                >
-                    <i className="fa-solid fa-angle-left"></i>
-                </button>
-
-                {pages.map((p) => (
-                    <button
-                        key={p}
-                        onClick={() => setPage(p)}
-                        className={`w-[30px] h-[30px] flex justify-center items-center border rounded-full text-sm ${page === p ? "text-white bg-blue-500" : "bg-white"
-                            }`}
-                    >
-                        {p}
-                    </button>
-                ))}
-
-                <button
-                    disabled={page === totalPages}
-                    onClick={() => setPage(page + 1)}
-                    className="w-[30px] h-[30px] flex justify-center items-center border rounded-full text-blue-500 disabled:text-blue-200"
-                >
-                    <i className="fa-solid fa-angle-right"></i>
-                </button>
-            </div>
+                        <button
+                            disabled={page === totalPages}
+                            onClick={() => setPage(page + 1)}
+                            className="w-[30px] h-[30px] flex justify-center items-center border rounded-full text-blue-500 disabled:text-blue-200"
+                        >
+                            <i className="fa-solid fa-angle-right"></i>
+                        </button>
+                    </div>
+                )
+            }
 
 
 

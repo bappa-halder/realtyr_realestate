@@ -28,6 +28,27 @@ export const fetchAllProperties = createAsyncThunk(
     }
 );
 
+export const fetchOnlyIdproperty = createAsyncThunk(
+    "property/fetchOnlyId",
+    async (page = 1, thunkApi) => {
+        try {
+            const { token } = thunkApi.getState().user
+            const res = await axios.get(
+                `http://localhost:3000/property/getOnlyId?page=${page}`,
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data"
+                    }
+                }
+            );
+            return res.data;
+        } catch (error) {
+            return thunkApi.rejectWithValue(
+                error.response?.data || { message: "Failed to fetch properties" }
+            );
+        }
+    })
+
 export const addProperty = createAsyncThunk("property/add", async (data, thunkApi) => {
     try {
         const state = thunkApi.getState()
@@ -121,8 +142,10 @@ const propertySlice = createSlice({
                 state.error = null
             })
             
-            .addCase(addProperty.fulfilled, (state) => {
+            .addCase(addProperty.fulfilled, (state, action) => {
                 state.loading = false
+                state.properties.unshift(action.payload)
+                state.totalItems += 1
             })
             .addCase(addProperty.rejected, (state, action) => {
                 state.loading = false

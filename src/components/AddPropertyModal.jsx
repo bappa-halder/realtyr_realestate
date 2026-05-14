@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { addProperty, fetchAllProperties } from "../features/propertySlice";
+import { addProperty, fetchAllProperties, fetchOnlyIdproperty } from "../features/propertySlice";
 import toast from "react-hot-toast";
 
 const AddPropertyModal = ({ setAddModal, currentPage, setPage, currentLength }) => {
@@ -23,7 +23,7 @@ const AddPropertyModal = ({ setAddModal, currentPage, setPage, currentLength }) 
             if (currentLength === 1 && currentPage > 1) {
                 setPage(currentPage - 1);
             } else {
-                dispatch(fetchAllProperties(currentPage));
+                dispatch(fetchOnlyIdproperty(currentPage));
             }
             toast.success("Property added successfully");
             reset()
