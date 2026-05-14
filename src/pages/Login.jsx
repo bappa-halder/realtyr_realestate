@@ -4,12 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../features/userSlice";
 import toast from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
+import PasswordToggle from "../hooks/PasswordToggle";
 
 const Login = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { error } = useSelector((state) => state.user);
-    const [showPassword, setShowPassword] = useState(false)
+    const {showPassword, togglePassword} = PasswordToggle()
 const [formData, setFormData] = useState({
     email: "",
     password: ""
@@ -33,11 +34,7 @@ return (
                     <input type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} placeholder="Enter your email id" className="py-2 ps-2 border rounded bg-transparent text-sm outline-none text-white placeholder:text-white" />
                     <div className="relative">
                         <input type={showPassword ? "text" : "password"} value={formData.password} onChange={(e) => setFormData({ ...formData, password: e.target.value })} placeholder="Enter password" className="w-full py-2 ps-2 border rounded bg-transparent text-sm outline-none text-white placeholder:text-white" />
-                        <button type="button" onClick={() => setShowPassword(!showPassword)} className="absolute right-3 top-1/2 -translate-y-1/2 text-white text-sm" > {showPassword ? (
-                            <FaEyeSlash size={18} />
-                        ) : (
-                            <FaEye size={18} />
-                        )} </button>
+                        <button type="button" onClick={togglePassword} className="absolute right-3 top-1/2 -translate-y-1/2 text-white text-sm" > {showPassword ? <EyeOff size={20} /> : <Eye size={20} />} </button>
                     </div>
                     {error && (
                         <p className="text-red-500 text-sm text-center">
