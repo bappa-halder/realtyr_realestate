@@ -84,7 +84,7 @@ const Signup = () => {
 
             <div className="relative">
               <input
-                type="password"
+                type={showPassword ? "text" : "password"}
                 name="password"
                 placeholder="Password"
                 value={formData.password}
