@@ -123,7 +123,7 @@ const propertySlice = createSlice({
                 state.loading = true
                 state.error = null
             })
-            
+
             .addCase(fetchAllProperties.fulfilled, (state, action) => {
                 state.loading = false;
                 state.properties = action.payload.data;
@@ -136,12 +136,28 @@ const propertySlice = createSlice({
                 state.error = action.payload
             })
 
+            .addCase(fetchOnlyIdproperty.pending, (state) => {
+                state.loading = true
+                state.error = null
+            })
+
+            .addCase(fetchOnlyIdproperty.fulfilled, (state, action) => {
+                state.loading = false;
+                state.properties = action.payload.data;
+                state.currentPage = action.payload.currentPage;
+                state.totalPages = action.payload.totalPages;
+                state.totalItems = action.payload.totalItems;
+            })
+            .addCase(fetchOnlyIdproperty.rejected, (state, action) => {
+                state.loading = false
+                state.error = action.payload
+            })
 
             .addCase(addProperty.pending, (state) => {
                 state.loading = true
                 state.error = null
             })
-            
+
             .addCase(addProperty.fulfilled, (state, action) => {
                 state.loading = false
                 state.properties.unshift(action.payload)
@@ -153,7 +169,7 @@ const propertySlice = createSlice({
             })
 
 
-           
+
 
             .addCase(deleteProperty.fulfilled, (state) => {
                 state.loading = false
