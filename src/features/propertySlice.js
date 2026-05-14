@@ -34,7 +34,7 @@ export const fetchOnlyIdproperty = createAsyncThunk(
         try {
             const { token } = thunkApi.getState().user
             const res = await axios.get(
-                `http://localhost:3000/property/getOnlyId?page=${page}`,
+                `${API}/property/getOnlyId?page=${page}`,
                 {
                     headers: {
                         Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data"
