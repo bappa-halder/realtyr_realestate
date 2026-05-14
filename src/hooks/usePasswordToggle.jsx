@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const PasswordToggle = ()=>{
+const usePasswordToggle = ()=>{
     const [showPassword, setShowPassword] = useState(false)
     const togglePassword = ()=>{
         setShowPassword((prev)=> !prev)
@@ -10,4 +10,4 @@ const PasswordToggle = ()=>{
     }
 }
 
-export default PasswordToggle
+export default usePasswordToggle

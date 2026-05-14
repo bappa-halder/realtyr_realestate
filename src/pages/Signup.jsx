@@ -3,13 +3,14 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { registerUser } from "../features/userSlice";
 import toast from "react-hot-toast";
+import usePasswordToggle from "../hooks/usePasswordToggle";
 
 const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const { loading, error } = useSelector((state) => state.user);
-
+  const { showPassword, togglePassword } = usePasswordToggle()
   const [formData, setFormData] = useState({
     userName: "",
     phone: "",
@@ -80,15 +81,24 @@ const Signup = () => {
               className="py-2 ps-2 border rounded bg-transparent text-sm outline-none text-white placeholder:text-white"
             />
 
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={formData.password}
-              onChange={handleChange}
-              required
-              className="py-2 ps-2 border rounded bg-transparent text-sm outline-none text-white placeholder:text-white"
-            />
+            <div className="relative">
+              <input
+                type="password"
+                name="password"
+                placeholder="Password"
+                value={formData.password}
+                onChange={handleChange}
+                required
+                className="w-full py-2 ps-2 border rounded bg-transparent text-sm outline-none text-white placeholder:text-white"
+              />
+              <button type="button" onClick={togglePassword} className="absolute right-3 top-1/2 -translate-y-1/2 text-white text-sm">
+                {showPassword ? (
+                  <FaEyeSlash size={18} />
+                ) : (
+                  <FaEye size={18} />
+                )}
+              </button>
+            </div>
 
             <input
               type="file"

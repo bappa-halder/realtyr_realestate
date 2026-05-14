@@ -4,13 +4,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { loginUser } from "../features/userSlice";
 import toast from "react-hot-toast";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
-import PasswordToggle from "../hooks/PasswordToggle";
+import usePasswordToggle from "../hooks/usePasswordToggle";
 
 const Login = () => {
     const dispatch = useDispatch()
     const navigate = useNavigate()
     const { error } = useSelector((state) => state.user);
-    const { showPassword, togglePassword } = PasswordToggle()
+    const { showPassword, togglePassword } = usePasswordToggle
     const [formData, setFormData] = useState({
         email: "",
         password: ""
