@@ -182,7 +182,7 @@ const Home = () => {
             </section>
 
 
-            <section id="testimonial">
+            <section id="testimonial" className="py-10 md:py-16">
                 <div className="container mx-auto px-4">
                     <Testimonial />
                 </div>

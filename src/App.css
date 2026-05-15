@@ -68,7 +68,7 @@ img{
   padding: 10px;
   border: 1px solid #000;
   top: auto !important;
-  bottom: 0 !important;
+  bottom: 24px !important;
 }
 
 /* Desktop positioning */
@@ -139,9 +139,8 @@ img{
 @media (max-width: 546px){
   .swiper-button-prev,
 .swiper-button-next{
-  /* width: 32px !important;
-  height: 32px !important ; */
-  display: none !important;
+  width: 32px !important;
+  height: 32px !important ;
 }
 }
 
