@@ -23,4 +23,4 @@ const FadeUp = ({
     )
 }
 
-export default FadeUp
+export default FadeUp 
