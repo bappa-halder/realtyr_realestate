@@ -9,6 +9,7 @@ import DelModal from "./DelModal";
 import AddPropertyModal from "./AddPropertyModal";
 import EditModal from "./EditModal";
 import toast from "react-hot-toast";
+import FadeUp from "./common/FadeUp";
 
 
 const LatestPropertyCard = () => {
@@ -32,7 +33,7 @@ const LatestPropertyCard = () => {
         setPropertyId(id)
     }
 
-    const { properties, totalPages } = useSelector((state) => state.property)
+    const { properties, totalPages, loading } = useSelector((state) => state.property)
     const { user } = useSelector((state) => state.user)
     const { wishLists } = useSelector((state) => state.wishList)
 
@@ -107,7 +108,11 @@ const LatestPropertyCard = () => {
             </h2>
 
             {
-                properties.length === 0 ? (
+                loading ? (
+                    <div className="flex justify-center items-center py-20">
+                        <div className="w-12 h-12 border-4 border-[#164c78] border-t-transparent rounded-full animate-spin"></div>
+                    </div>
+                ) : properties.length === 0 ? (
                     <div className="text-center py-10">
                         <h3 className="text-2xl font-semibold text-gray-600">
                             Property not found
@@ -125,59 +130,61 @@ const LatestPropertyCard = () => {
                                     wish.propertyId?._id === item._id
                             );
                             return (
-                                <div key={item._id}>
-                                    <div className="relative">
-                                        <div className="h-[250px]">
-                                            <img src={item.image} alt={item.title} className="rounded-lg w-full" loading="lazy" />
-                                        </div>
-                                        <p className="leading-none py-2 px-3 bg-white rounded-xl absolute top-3 right-3 text-sm">
-                                            For {item.purpose}
-                                        </p>
-
-                                        {
-                                            user?.role === "user" && (
-                                                <button onClick={() => handleWishList(item._id)} className="absolute top-2 left-2 text-red-500 w-[25px] h-[25px] bg-black/30 backdrop-blur-xs rounded-full">
-                                                    {isWishListed ? <i className="fa-solid fa-heart"></i> : <i className="fa-regular fa-heart"></i>}
-                                                </button>
-                                            )
-                                        }
-
-                                    </div>
-                                    <div>
-                                        <div className="flex justify-between mt-4">
-                                            <h4 className="text-lg md:text-[1.35rem]">{item.title}</h4>
-                                            <h4 className="text-lg md:text-[1.35rem]">${item.price}</h4>
-                                        </div>
-
-                                        <p className="text-sm md:text-base mt-2 mb-4">{item.location}</p>
-
-                                        <div className="flex flex-wrap gap-3 mt-3">
-                                            <div className="flex gap-2 px-3 py-1 rounded-xl border text-sm">
-                                                <img src={bedIcon} alt="" className="w-[15px] object-contain" />
-                                                <p>{item.bedroom}</p>
+                                <FadeUp>
+                                    <div key={item._id}>
+                                        <div className="relative">
+                                            <div className="h-[250px]">
+                                                <img src={item.image} alt={item.title} className="rounded-lg w-full" loading="lazy" />
                                             </div>
-                                            <div className="flex gap-2 px-3 py-1 rounded-xl border text-sm">
-                                                <img src={bathIcon} alt="" className="w-[15px] object-contain" />
-                                                <p>{item.bathroom}</p>
-                                            </div>
-                                            <div className="flex gap-2 px-3 py-1 rounded-xl border text-sm">
-                                                <img src={area} alt="" className="w-[15px] object-contain" />
-                                                <p>{item.area}</p>
-                                            </div>
-                                        </div>
+                                            <p className="leading-none py-2 px-3 bg-white rounded-xl absolute top-3 right-3 text-sm">
+                                                For {item.purpose}
+                                            </p>
 
-                                        {
-                                            user?.role === "admin" && (
-                                                <div className="flex gap-6 mt-6">
-                                                    <button onClick={() => handleEditModal(item)} className="flex-1 py-1 border border-[#164c78] rounded hover:bg-[#164c78] hover:text-white transition duration-300 ease-in-out">Edit</button>
-                                                    <button onClick={() => handleDelModal(item._id)} className="flex-1 py-1 border border-red-600 rounded hover:bg-red-600 hover:text-white transition duration-300 ease-in-out">Delete</button>
+                                            {
+                                                user?.role === "user" && (
+                                                    <button onClick={() => handleWishList(item._id)} className="absolute top-2 left-2 text-red-500 w-[25px] h-[25px] bg-black/30 backdrop-blur-xs rounded-full">
+                                                        {isWishListed ? <i className="fa-solid fa-heart"></i> : <i className="fa-regular fa-heart"></i>}
+                                                    </button>
+                                                )
+                                            }
+
+                                        </div>
+                                        <div>
+                                            <div className="flex justify-between mt-4">
+                                                <h4 className="text-lg md:text-[1.35rem]">{item.title}</h4>
+                                                <h4 className="text-lg md:text-[1.35rem]">${item.price}</h4>
+                                            </div>
+
+                                            <p className="text-sm md:text-base mt-2 mb-4">{item.location}</p>
+
+                                            <div className="flex flex-wrap gap-3 mt-3">
+                                                <div className="flex gap-2 px-3 py-1 rounded-xl border text-sm">
+                                                    <img src={bedIcon} alt="" className="w-[15px] object-contain" />
+                                                    <p>{item.bedroom}</p>
                                                 </div>
-                                            )
-                                        }
+                                                <div className="flex gap-2 px-3 py-1 rounded-xl border text-sm">
+                                                    <img src={bathIcon} alt="" className="w-[15px] object-contain" />
+                                                    <p>{item.bathroom}</p>
+                                                </div>
+                                                <div className="flex gap-2 px-3 py-1 rounded-xl border text-sm">
+                                                    <img src={area} alt="" className="w-[15px] object-contain" />
+                                                    <p>{item.area}</p>
+                                                </div>
+                                            </div>
+
+                                            {
+                                                user?.role === "admin" && (
+                                                    <div className="flex gap-6 mt-6">
+                                                        <button onClick={() => handleEditModal(item)} className="flex-1 py-1 border border-[#164c78] rounded hover:bg-[#164c78] hover:text-white transition duration-300 ease-in-out">Edit</button>
+                                                        <button onClick={() => handleDelModal(item._id)} className="flex-1 py-1 border border-red-600 rounded hover:bg-red-600 hover:text-white transition duration-300 ease-in-out">Delete</button>
+                                                    </div>
+                                                )
+                                            }
+                                        </div>
+
+
                                     </div>
-
-
-                                </div>
+                                </FadeUp>
                             )
                         })}
 

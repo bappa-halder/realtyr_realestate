@@ -6,6 +6,7 @@ import testimonial02 from "../assets/testimonial-02.jpg";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import FadeUp from "./common/FadeUp";
 
 const testimonials = [
   {
@@ -44,36 +45,38 @@ const Testimonial = () => {
     >
       {testimonials.map((item, index) => (
         <SwiperSlide key={index}>
-          <div className="w-full px-4 sm:px-6 lg:px-8">
-            <div className="max-w-6xl mx-auto bg-white rounded-xl shadow-sm p-6 sm:p-8 lg:p-10">
-              <div className="flex flex-col md:flex-row gap-6 lg:gap-10 items-center">
-                
-                {/* Image */}
-                <div className="flex-shrink-0">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="w-[170px] h-[200px] sm:w-[250px] sm:h-[350px] md:w-[350px] md:h-[450px] rounded-lg object-cover"
-                  />
+          <FadeUp>
+            <div className="w-full">
+              <div className="mx-auto bg-white rounded-xl border p-6 sm:p-8 lg:p-10">
+                <div className="flex flex-col md:flex-row gap-6 lg:gap-10 items-center">
+
+                  {/* Image */}
+                  <div className="flex-shrink-0">
+                    <img
+                      src={item.image}
+                      alt={item.name}
+                      className="w-[170px] h-[200px] sm:w-[250px] sm:h-[350px] md:w-[350px] md:h-[450px] rounded-lg object-cover"
+                    />
+                  </div>
+
+                  {/* Content */}
+                  <div className="text-center md:text-left">
+                    <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6">
+                      “{item.text}”
+                    </p>
+
+                    <p className="text-base sm:text-lg font-semibold">
+                      {item.name}
+                    </p>
+                    <p className="text-xs sm:text-sm text-gray-600">
+                      {item.location}
+                    </p>
+                  </div>
+
                 </div>
-
-                {/* Content */}
-                <div className="text-center md:text-left">
-                  <p className="text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed mb-4 sm:mb-6">
-                    “{item.text}”
-                  </p>
-
-                  <p className="text-base sm:text-lg font-semibold">
-                    {item.name}
-                  </p>
-                  <p className="text-xs sm:text-sm text-gray-600">
-                    {item.location}
-                  </p>
-                </div>
-
               </div>
             </div>
-          </div>
+          </FadeUp>
         </SwiperSlide>
       ))}
     </Swiper>

@@ -4,6 +4,7 @@ import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import toast from "react-hot-toast";
 import { fetchWishList, removeFromWishList } from "../features/wishListSlice";
+import FadeUp from "../components/common/FadeUp";
 
 const Wishlist = () => {
   const dispatch = useDispatch()
@@ -16,7 +17,7 @@ const Wishlist = () => {
     toast.success("Property removed from wishlist")
   };
   useEffect(() => {
-      dispatch(fetchWishList());
+    dispatch(fetchWishList());
   }, [dispatch]);
 
 
@@ -28,52 +29,54 @@ const Wishlist = () => {
 
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
           {wishLists
-          .filter((item) => item.propertyId)
-          .map((item) => (
-            <div
-              key={item._id}
-              className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden"
-            >
-              <div className="h-48 w-full overflow-hidden">
-                <img
-                  src={item.propertyId?.image}
-                  alt={item.propertyId?.title}
-                  className="h-full w-full object-cover"
-                />
-              </div>
+            .filter((item) => item.propertyId)
+            .map((item) => (
+              <FadeUp>
+                <div
+                  key={item._id}
+                  className="bg-white rounded-xl shadow-md hover:shadow-xl transition-shadow duration-300 overflow-hidden"
+                >
+                  <div className="h-48 w-full overflow-hidden">
+                    <img
+                      src={item.propertyId?.image}
+                      alt={item.propertyId?.title}
+                      className="h-full w-full object-cover"
+                    />
+                  </div>
 
-              <div className="p-4 space-y-2">
-                <h3 className="text-lg font-semibold text-gray-800 line-clamp-1">
-                  {item.propertyId?.title}
-                </h3>
+                  <div className="p-4 space-y-2">
+                    <h3 className="text-lg font-semibold text-gray-800 line-clamp-1">
+                      {item.propertyId?.title}
+                    </h3>
 
-                <p className="text-green-600 font-bold">
-                  $ {item.propertyId?.price}
-                </p>
+                    <p className="text-green-600 font-bold">
+                      $ {item.propertyId?.price}
+                    </p>
 
-                <div className="text-sm text-gray-600 space-y-1">
-                  <p>{item.propertyId?.location}</p>
-                  <p>
-                    {item.propertyId?.bedroom} Bed • {item.propertyId?.bathroom} Bath
-                  </p>
-                  <p>Area: {item.propertyId?.area}</p>
-                  <p>Purpose: {item.propertyId?.purpose}</p>
+                    <div className="text-sm text-gray-600 space-y-1">
+                      <p>{item.propertyId?.location}</p>
+                      <p>
+                        {item.propertyId?.bedroom} Bed • {item.propertyId?.bathroom} Bath
+                      </p>
+                      <p>Area: {item.propertyId?.area}</p>
+                      <p>Purpose: {item.propertyId?.purpose}</p>
+                    </div>
+
+                    {user?.role === "user" && (
+                      <button onClick={() => handleRemoveWishlist(item._id)}>
+                        Remove
+                      </button>
+                    )}
+
+                    {user?.role === "admin" && (
+                      <p className="mt-3 text-xs text-gray-500">
+                        Added by: {item.userId?.userName} ({item.userId?.email})
+                      </p>
+                    )}
+                  </div>
                 </div>
-
-                {user?.role === "user" && (
-                  <button onClick={() => handleRemoveWishlist(item._id)}>
-                    Remove
-                  </button>
-                )}
-
-                {user?.role === "admin" && (
-                  <p className="mt-3 text-xs text-gray-500">
-                    Added by: {item.userId?.userName} ({item.userId?.email})
-                  </p>
-                )}
-              </div>
-            </div>
-          ))}
+              </FadeUp>
+            ))}
         </div>
       </div>
 

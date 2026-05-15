@@ -14,8 +14,23 @@ import Wishlist from './pages/Wishlist'
 import ScrollToTop from './ScrollToTop'
 import Terms from './pages/Terms'
 import Privacy from './pages/Privacy'
+import Lenis from 'lenis'
 
 function App() {
+  useEffect(() => {
+
+    const lenis = new Lenis({
+      duration: 1.2,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+  }, []);
 
   return (
     <>
