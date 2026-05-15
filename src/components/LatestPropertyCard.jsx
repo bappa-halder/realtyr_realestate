@@ -128,7 +128,7 @@ const LatestPropertyCard = () => {
                                 <div key={item._id}>
                                     <div className="relative">
                                         <div className="h-[250px]">
-                                            <img src={item.image} alt={item.title} className="rounded-lg w-full" />
+                                            <img src={item.image} alt={item.title} className="rounded-lg w-full" loading="lazy" />
                                         </div>
                                         <p className="leading-none py-2 px-3 bg-white rounded-xl absolute top-3 right-3 text-sm">
                                             For {item.purpose}

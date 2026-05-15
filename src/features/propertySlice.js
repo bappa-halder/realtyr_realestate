@@ -148,6 +148,7 @@ const propertySlice = createSlice({
                 state.totalPages = action.payload.totalPages;
                 state.totalItems = action.payload.totalItems;
             })
+            
             .addCase(fetchOnlyIdproperty.rejected, (state, action) => {
                 state.loading = false
                 state.error = action.payload

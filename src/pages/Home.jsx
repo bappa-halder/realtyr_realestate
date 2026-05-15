@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import video from "../assets/home_video.mp4"
 import advanceImg from "../assets/advance-property-search.jpg"
@@ -13,10 +13,25 @@ import LatestPropertyCard from "../components/LatestPropertyCard";
 
 const Home = () => {
     const videoRef = useRef(null);
+    const [playVideo, setPlayVideo] = useState(false)
+    const handleVideo = () => {
+        const video = videoRef.current
+        if (playVideo) {
+            video.pause()
+            setPlayVideo(false)
+        }
+        else {
+            video.play()
+            setPlayVideo(true)
+        }
+    }
+    const videoEnd = () => {
+        const video = videoRef.current
+        video.currentTime = 0
+        video.load()
+        setPlayVideo(false)
+    }
 
-    useEffect(() => {
-        videoRef.current?.play().catch(() => { });
-    }, []);
 
     return (
         <>
@@ -48,13 +63,23 @@ const Home = () => {
                         </p>
                     </div>
 
-                    <div className="mt-10 md:mt-[60px]">
+                    <div className="mt-10 md:mt-[60px] relative">
                         <video
-                            ref={videoRef} loop muted playsInline
+                            ref={videoRef}
+                            onEnded={videoEnd}
                             className="w-full lg:max-h-[500px] md:max-h-[400px] rounded-lg object-cover"
                         >
                             <source src={video} type="video/mp4" />
                         </video>
+                        <button onClick={handleVideo} className="w-[60px] h-[60px] rounded-full text-4xl text-white absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-black/30 backdrop-blur-md">
+                            {
+                                playVideo ? (
+                                    <i class="fa-solid fa-pause"></i>
+                                ) : (
+                                    <i class="fa-solid fa-play"></i>
+                                )
+                            }
+                        </button>
                     </div>
 
                 </div>
