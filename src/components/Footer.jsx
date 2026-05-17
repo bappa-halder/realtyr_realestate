@@ -29,8 +29,8 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="text-white pt-16 md:pt-32 pb-12 px-4 md:px-6 lg:px-0">
-                    <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row md:justify-between gap-10">
+                <div className="container mx-auto px-4 text-white pt-16 md:pt-32 pb-12">
+                    <div className="flex flex-col md:flex-row md:justify-between gap-10">
 
                         {/* Logo + Description */}
                         <div className="md:w-1/3">
@@ -84,8 +84,8 @@ const Footer = () => {
                     </div>
                 </div>
 
-                <div className="bg-black border-t border-gray-700 py-6 px-4 md:px-6 lg:px-0">
-                    <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0">
+                <div className="container mx-auto px-4 bg-black border-t border-gray-700 py-6">
+                    <div className="flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0">
 
                         <p className="text-sm md:text-base text-white">
                             © 2026 <Link to="/" className="hover:text-gray-300">Realtyr</Link> All rights reserved.

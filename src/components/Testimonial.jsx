@@ -44,8 +44,8 @@ const Testimonial = () => {
       className="w-full"
     >
       {testimonials.map((item, index) => (
-        <SwiperSlide key={index}>
-          <FadeUp>
+        <FadeUp>
+          <SwiperSlide key={index}>
             <div className="w-full">
               <div className="mx-auto bg-white rounded-xl border p-6 sm:p-8 lg:p-10">
                 <div className="flex flex-col md:flex-row gap-6 lg:gap-10 items-center">
@@ -76,8 +76,8 @@ const Testimonial = () => {
                 </div>
               </div>
             </div>
-          </FadeUp>
-        </SwiperSlide>
+          </SwiperSlide>
+        </FadeUp>
       ))}
     </Swiper>
   );
