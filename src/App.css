@@ -165,7 +165,9 @@ img {
 }
 
 @media (max-width: 546px) {
-
+.swiper {
+    padding-bottom: 45px !important;
+  }
   .swiper-button-prev,
   .swiper-button-next {
     width: 32px !important;

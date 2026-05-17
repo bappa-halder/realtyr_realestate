@@ -28,17 +28,16 @@ const About = () => {
                             </div>
                             <h2 className="text-3xl md:text-4xl font-semibold">About us</h2>
                         </div>
-
                         {/* Main content */}
                         <div className="flex flex-col lg:flex-row gap-10 lg:gap-[70px]">
 
                             {/* Images */}
-                            <div className="relative w-full lg:w-1/2 h-[420px] sm:h-[480px]">
-                                <div className="max-w-[260px] sm:max-w-[372px] absolute bottom-0 left-0">
+                            <div className="relative w-full lg:w-1/2">
+                                <div className="w-[60%] sm:mt-[135px] mt-[100px]">
                                     <img src={about_first} alt="" className="rounded-xl w-full" />
                                 </div>
 
-                                <div className="max-w-[240px] sm:max-w-[310px] max-h-[370px] border-2 border-white rounded-xl absolute top-0 right-0">
+                                <div className="w-[60%] border-2 border-white rounded-xl absolute top-0 right-0">
                                     <img src={about_second} alt="" className="rounded-xl w-full h-full object-cover" />
                                 </div>
                             </div>
@@ -87,6 +86,7 @@ const About = () => {
                         </div>
                     </FadeUp>
 
+
                 </div>
             </section>
 
@@ -108,10 +108,10 @@ const About = () => {
                             </div>
                             <h2 className="text-3xl md:text-4xl font-semibold">Our Services</h2>
                         </div>
-
-                        {/* Content */}
-                        <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-[80px]">
-
+                    </FadeUp>
+                    {/* Content */}
+                    <div className="flex flex-col lg:flex-row items-center gap-10 lg:gap-[80px]">
+                        <FadeUp>
                             {/* Services list */}
                             <div className="w-full lg:max-w-[670px]">
 
@@ -158,14 +158,15 @@ const About = () => {
                                 </div>
 
                             </div>
-
+                        </FadeUp>
+                        <FadeUp>
                             {/* Image */}
                             <div className="w-full max-w-full lg:max-w-[545px]">
                                 <img src={service} alt="" className="rounded-xl w-full" />
                             </div>
+                        </FadeUp>
 
-                        </div>
-                    </FadeUp>
+                    </div>
 
                 </div>
             </section>
