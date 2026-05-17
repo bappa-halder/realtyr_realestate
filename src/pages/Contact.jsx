@@ -46,9 +46,9 @@ const Contact = () => {
               <img src={contact} alt="" className="rounded-xl w-full min-h-[225px] sm:min-h-fit" />
             </div>
           </FadeUp>
-          <FadeUp>
-            {/* Content */}
-            <div className="flex flex-col lg:flex-row gap-10 lg:gap-[60px] mt-10 md:mt-12">
+          {/* Content */}
+          <div className="flex flex-col lg:flex-row gap-10 lg:gap-[60px] mt-10 md:mt-12">
+            <FadeUp>
 
               {/* Left info */}
               <div className="w-full lg:max-w-[560px]">
@@ -80,9 +80,10 @@ const Contact = () => {
                   </div>
                 </div>
               </div>
-
+            </FadeUp>
+            <FadeUp>
               {/* Form */}
-              <div className="w-full lg:max-w-[670px] border sm:border-0 p-4 sm:p-0">
+              <div className="w-full lg:max-w-[670px] border sm:border-0 rounded-lg p-4 sm:p-0">
                 <form onSubmit={handleSubmit(onSubmit)}>
 
                   {/* Names */}
@@ -157,9 +158,10 @@ const Contact = () => {
                   {error && <p className="text-red-500 mt-4">{error}</p>}
                 </form>
               </div>
+            </FadeUp>
 
-            </div>
-          </FadeUp>
+          </div>
+
 
         </div>
       </section>
