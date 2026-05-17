@@ -9,6 +9,7 @@ import commercial from "../assets/service-icon-01.svg"
 import home from "../assets/service-icon-02.svg"
 import relocation from "../assets/service-icon-03.svg"
 import service from "../assets/service-image.jpg"
+import FadeUp from "../components/common/FadeUp";
 const About = () => {
     return (
         <>

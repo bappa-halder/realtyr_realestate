@@ -94,18 +94,18 @@ const LatestPropertyCard = () => {
 
 
 
-
-
-            <div className="tag flex items-center gap-2 mb-1">
-                <div className="w-[15px] h-[15px] rounded-full flex justify-center items-center border">
-                    <div className="w-[7.5px] h-[7.5px] rounded-full bg-black"></div>
+            <FadeUp>
+                <div className="tag flex items-center gap-2 mb-1">
+                    <div className="w-[15px] h-[15px] rounded-full flex justify-center items-center border">
+                        <div className="w-[7.5px] h-[7.5px] rounded-full bg-black"></div>
+                    </div>
+                    <p className="leading-none text-sm md:text-base">EXPLORE</p>
                 </div>
-                <p className="leading-none text-sm md:text-base">EXPLORE</p>
-            </div>
 
-            <h2 className="mb-6 md:mb-7 text-3xl md:text-4xl">
-                Latest Properties
-            </h2>
+                <h2 className="mb-6 md:mb-7 text-3xl md:text-4xl">
+                    Latest Properties
+                </h2>
+            </FadeUp>
 
             {
                 loading ? (

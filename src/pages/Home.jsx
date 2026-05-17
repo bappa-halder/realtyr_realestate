@@ -99,9 +99,9 @@ const Home = () => {
 
             <section id="about" className="py-10 md:py-16">
                 <div className="container mx-auto px-4">
-                    <FadeUp>
-                        <div className="flex flex-col lg:flex-row lg:justify-between gap-10">
+                    <div className="flex flex-col lg:flex-row lg:justify-between gap-10">
 
+                        <FadeUp>
                             <div className="w-full flex flex-col justify-between lg:max-w-[600px] md:max-w-full gap-8">
                                 <h2 className="text-3xl md:text-4xl font-semibold">About us</h2>
 
@@ -141,12 +141,15 @@ const Home = () => {
                                     </div>
                                 </div>
                             </div>
-
+                        </FadeUp>
+                        <FadeUp>
                             <div className="max-w-full lg:max-w-[535px]">
                                 <img src={about} alt="" className="rounded-lg w-full lg:max-h-full md:max-h-[400px] sm:max-h-[300px] max-h-[250px]" />
                             </div>
-                        </div>
+                        </FadeUp>
+                    </div>
 
+                    <FadeUp>
                         <div className="max-w-full lg:max-w-[535px] lg:ms-auto flex flex-col items-center sm:items-start sm:flex-row gap-6 mt-8">
                             <div className="text-center sm:text-left">
                                 <p className="text-3xl md:text-5xl mb-1 md:mb-2">95%</p>
@@ -164,6 +167,7 @@ const Home = () => {
                             </div>
                         </div>
                     </FadeUp>
+
 
                 </div>
             </section>

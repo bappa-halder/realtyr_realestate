@@ -2,32 +2,34 @@ import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo-white.svg"
 import footer from "../assets/footer.jpg"
+import FadeUp from "./common/FadeUp";
 
 const Footer = () => {
     return (
         <>
 
             <footer id="footer" className="relative pt-10 md:pt-16">
-
-                <div className="container mx-auto px-4">
-                    <div className="relative">
-                        <img src={footer} alt="Footer Banner" className="w-full h-auto object-cover rounded-xl min-h-[330px]" />
-                        <div className="absolute w-full inset-0 bg-black/60 flex flex-col items-center justify-center px-4 py-16 md:py-24 text-center rounded-xl">
-                            <div className="max-w-[750px] text-white">
-                                <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold">Find your dream home today!</h2>
-                                <p className="mt-2 mb-6 md:mb-10 text-sm md:text-base leading-relaxed">
-                                    We make it easy for you to find the perfect property that meets your needs. With thousands of listings across diverse property types, your dream home is just a few clicks away.
-                                </p>
-                                <Link
-                                    to="/contact"
-                                    className="inline-block py-2 px-6 border border-white rounded-lg hover:bg-white hover:text-black transition duration-300 ease-in-out"
-                                >
-                                    Join Now
-                                </Link>
+                <FadeUp>
+                    <div className="container mx-auto px-4">
+                        <div className="relative">
+                            <img src={footer} alt="Footer Banner" className="w-full h-auto object-cover rounded-xl min-h-[330px]" />
+                            <div className="absolute w-full inset-0 bg-black/60 flex flex-col items-center justify-center px-4 py-16 md:py-24 text-center rounded-xl">
+                                <div className="max-w-[750px] text-white">
+                                    <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold">Find your dream home today!</h2>
+                                    <p className="mt-2 mb-6 md:mb-10 text-sm md:text-base leading-relaxed">
+                                        We make it easy for you to find the perfect property that meets your needs. With thousands of listings across diverse property types, your dream home is just a few clicks away.
+                                    </p>
+                                    <Link
+                                        to="/contact"
+                                        className="inline-block py-2 px-6 border border-white rounded-lg hover:bg-white hover:text-black transition duration-300 ease-in-out"
+                                    >
+                                        Join Now
+                                    </Link>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
+                </FadeUp>
 
                 <div className="container mx-auto px-4 text-white pt-16 md:pt-32 pb-12">
                     <div className="flex flex-col md:flex-row md:justify-between gap-10">
