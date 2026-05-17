@@ -43,7 +43,7 @@ const Contact = () => {
           <FadeUp>
             {/* Banner image */}
             <div>
-              <img src={contact} alt="" className="rounded-xl w-full" />
+              <img src={contact} alt="" className="rounded-xl w-full min-h-[225px] sm:min-h-fit" />
             </div>
           </FadeUp>
           <FadeUp>
@@ -82,7 +82,7 @@ const Contact = () => {
               </div>
 
               {/* Form */}
-              <div className="w-full lg:max-w-[670px]">
+              <div className="w-full lg:max-w-[670px] border sm:border-0 p-4 sm:p-0">
                 <form onSubmit={handleSubmit(onSubmit)}>
 
                   {/* Names */}
