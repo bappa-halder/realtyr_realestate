@@ -20,6 +20,27 @@ img {
   object-fit: cover;
 }
 
+.navlink {
+  color: #164c78;
+  position: relative;
+  max-width: fit-content;
+}
+
+.navlink::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 1px;
+  background: #164c78;
+  transition: 0.3s ease-in-out;
+}
+
+.navlink:hover::after {
+  width: 100%;
+}
+
 .profile::before {
   content: "";
   position: absolute;
@@ -76,6 +97,20 @@ img {
   display: none;
 }
 
+.responsive-swiper {
+  width: 100%;
+  padding: 30px 0 50px;
+}
+
+.slide-card {
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  font-weight: 600;
+}
+
 #footer {
   background: linear-gradient(white 30%, black 30%);
 }
@@ -100,47 +135,33 @@ img {
   }
 }
 
-
 @media (max-width: 768px) {
+  .swiper {
+    padding-bottom: 60px !important;
+  }
+
+  .swiper-button-prev,
+  .swiper-button-next {
+    bottom: 0 !important;
+  }
+
+  .swiper-button-prev {
+    left: 38% !important;
+  }
+
+  .swiper-button-next {
+    right: 38% !important;
+  }
+
+  .slide-card {
+    height: 200px;
+    font-size: 20px;
+  }
+
   #footer {
     background: linear-gradient(white 15%, black 15%);
   }
-}
 
-.swiper {
-  padding-bottom: 60px !important;
-}
-
-.swiper-button-prev,
-.swiper-button-next {
-  bottom: 0 !important;
-}
-
-.swiper-button-prev {
-  left: 38% !important;
-}
-
-.swiper-button-next {
-  right: 38% !important;
-}
-
-.slide-card {
-  height: 200px;
-  font-size: 20px;
-}
-
-.responsive-swiper {
-  width: 100%;
-  padding: 30px 0 50px;
-}
-
-.slide-card {
-  border-radius: 16px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 22px;
-  font-weight: 600;
 }
 
 @media (max-width: 546px) {
@@ -150,27 +171,6 @@ img {
     width: 32px !important;
     height: 32px !important;
   }
-}
-
-.navlink {
-  color: #164c78;
-  position: relative;
-  max-width: fit-content;
-}
-
-.navlink::after {
-  content: "";
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: #164c78;
-  transition: 0.3s ease-in-out;
-}
-
-.navlink:hover::after {
-  width: 100%;
 }
 
 @media (max-width: 480px) {
