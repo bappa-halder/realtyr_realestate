@@ -10,7 +10,7 @@ const Signup = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { loading, error } = useSelector((state) => state.user);
+  const { registerLoading, error } = useSelector((state) => state.user);
   const { showPassword, togglePassword } = usePasswordToggle()
   const [formData, setFormData] = useState({
     userName: "",
@@ -110,7 +110,7 @@ const Signup = () => {
             />
 
             <button type="submit" className="py-2 bg-indigo-500 hover:bg-indigo-600 transition duration-300 ease-in-out text-white rounded">
-              {loading ? "Registering..." : "Register"}
+              {registerLoading ? "Registering..." : "Register"}
             </button>
 
             {error && <p style={{ color: "red" }}>{error}</p>}
