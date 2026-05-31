@@ -56,12 +56,14 @@ const Home = () => {
 
                         <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-6 mt-8 md:mt-10">
                             <FadeUp>
+                                <div className="shrink-0">
                                 <Link
                                     to="/properties"
-                                    className="shrink-0 md:text-lg sm:text-base text-sm px-5 py-3 rounded-lg border border-black bg-black text-white w-fit hover:bg-white hover:text-black transition duration-300 ease-in-out"
+                                    className="md:text-lg sm:text-base text-sm px-5 py-3 rounded-lg border border-black bg-black text-white w-fit hover:bg-white hover:text-black transition duration-300 ease-in-out"
                                 >
                                     Explore Our Properties
                                 </Link>
+                                </div>
                             </FadeUp>
                             <FadeUp>
                                 <p className="max-w-[520px]">
