@@ -58,7 +58,7 @@ const Home = () => {
                             <FadeUp>
                                 <Link
                                     to="/properties"
-                                    className="md:text-lg sm:text-base text-sm px-5 py-3 rounded-lg border border-black bg-black text-white w-fit hover:bg-white hover:text-black transition duration-300 ease-in-out"
+                                    className="shrink-0 md:text-lg sm:text-base text-sm px-5 py-3 rounded-lg border border-black bg-black text-white w-fit hover:bg-white hover:text-black transition duration-300 ease-in-out"
                                 >
                                     Explore Our Properties
                                 </Link>
